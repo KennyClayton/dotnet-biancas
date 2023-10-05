@@ -4,7 +4,12 @@ using BiancasBikes.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace BiancasBikes.Data;
-public class BiancasBikesDbContext : IdentityDbContext<IdentityUser>
+public class BiancasBikesDbContext : IdentityDbContext<IdentityUser> //# BiancasBikesDbContext inherits from the IdentityDbContext<IdentityUser> class, rather than from DbContext
+//# IdentityDbContext comes with a number of extra models and tables that will be added to the database. They include:
+//# IdentityUser - this will hold login credentials for users
+//# IdentityRole - this will hold the various roles that a use can have
+//# IdentityUserRole - a many-to-many table between roles and users. These define which users have which roles.
+
 {
     private readonly IConfiguration _configuration;
     public DbSet<Bike> Bikes { get; set; }
@@ -20,16 +25,16 @@ public class BiancasBikesDbContext : IdentityDbContext<IdentityUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(modelBuilder); //# this is a method
 
-        modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+        modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole //# seeding the database with the identityrole information
         {
             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
             Name = "Admin",
             NormalizedName = "admin"
         });
 
-        modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
+        modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser //# seeding the database with the identityuser information
         {
             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
             UserName = "Administrator",

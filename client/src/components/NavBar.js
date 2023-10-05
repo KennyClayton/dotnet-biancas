@@ -12,6 +12,8 @@ import {
   NavbarToggler,
 } from "reactstrap";
 import { logout } from "../managers/authManager";
+import { getBikesInShopCount } from "../managers/bikeManager";
+
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
   const [inventory, setInventory] = useState(0);
@@ -19,9 +21,10 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
 
   const toggleNavbar = () => setOpen(!open);
 
-  const getInventory = () => {
-    //implement functionality here....
-  };
+  //^ Added get for getting the inventory (bikes with work orders where a work order doesn't have a DateCompleted)
+  const getInventory = () => {getBikesInShopCount().then(setInventory);};
+  useEffect(() => {loggedInUser && getInventory();}, [loggedInUser]); //* "We only want to call getInventory when there is a logged in user."
+  //^ END of the get for inventory and its useEffect
 
   useEffect(() => {
     loggedInUser && getInventory();

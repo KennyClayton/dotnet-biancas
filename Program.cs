@@ -69,6 +69,9 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers(); //* all endpoints come in through this function. "This tells ASP.NET that we want to use controllers to create endpoints, and the framework is able to discover those controllers in our code."
+
 
 app.Run();
+
+//# What is a controller? "a controller is a class". " A controller class contains methods that are the handlers for the endpoints of the API. In web APIs the controllers inherit many of the properties and methods we will use from the ControllerBase class."
