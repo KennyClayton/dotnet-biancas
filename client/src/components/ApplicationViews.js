@@ -5,6 +5,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import WorkOrderList from "./workorders/WorkOrderList";
 import CreateWorkOrder from "./workorders/CreateWorkOrder";
+import UserProfileList from "./userprofiles/UserProfileList";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -30,7 +31,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         "The Route group create two routes for workorders. 
         The route marked index will match to workorders with no extra url segments. 
         The create route will match /workorders/create." */}
-        <Route path="workorders"> 
+        <Route path="workorders">
           <Route
             index
             element={
@@ -52,7 +53,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="employees"
           element={
             <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
-              <p>Employees</p>
+              <UserProfileList />
             </AuthorizedRoute>
           }
         />
